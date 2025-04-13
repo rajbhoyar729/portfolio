@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 248, 250, 252;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 15, 23, 42;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-emerald-500 to-orange-500;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
+  }
+
+  .card {
+    @apply bg-background/50 backdrop-blur-sm border border-indigo-900/20 rounded-xl p-6 shadow-lg hover:shadow-indigo-500/10 transition-all duration-300;
+  }
+}
+
+.animated-border {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: linear-gradient(90deg, #4f46e5, #10b981, #f97316, #4f46e5);
+  background-size: 400% 400%;
+  animation: border-animation 8s linear infinite;
+}
+
+@keyframes border-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.scroll-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
